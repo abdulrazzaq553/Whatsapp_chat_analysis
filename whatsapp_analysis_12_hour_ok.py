@@ -16,7 +16,7 @@ st.sidebar.markdown("<h2 style='text-align: center; color: #4A90E2;'>📊 WhatsA
 # File uploader in the sidebar, restricted to txt and zip files
 file = st.sidebar.file_uploader('📁 Choose a File', type=['txt', 'zip'])
 
-if file is not None:
+if file is no None:
     # Apply link2nd.razzaq function
     response = link2nd.razzaq(file)
 
