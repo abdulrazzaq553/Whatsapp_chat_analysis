@@ -1,7 +1,6 @@
 from urlextract import URLExtract
 import matplotlib.pyplot as plt
-import pandas as pd
-from wordcloud import WordCloud
+
 from collections import Counter
 
 import seaborn as sns
