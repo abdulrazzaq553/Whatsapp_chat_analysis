@@ -11,7 +11,7 @@ import json
 
 def razzaq(file):
     headers = {
-        "Authorization": "Bearer ya29.a0AcM612z_sqQZazFIOIRC75jAyxuqxv7aJc_DjDkGF93oAyrkeIb6pa1Z5z5C6hEgp0lDxnLJMhv9F7MxJm6SDl1YeRbxlq8nBzT6cKlYbPZOMT3uQtXZxBIo7CgsdN0r24C0NXqn6RoS4BGUlmN7g4MvtU6UqylpIER3r3xqaCgYKAbESARASFQHGX2MiuTrq5J8DxcKrd_xtwkectg0175"
+        "Authorization": "Bearer ya29.a0AeXRPp4p6-xSPOr0ZOdl5_l8jovM8tMo2fI_nQO3jsoFifuj5CV1_UDEFjDazhAejC0zVKobmxLzNXEWLD7WcKose6mN1LMXwsUbJaaoJLT6ANDjWJfuAQFB_QiEMMokr0qkxiRZckflsXQzoSWMVHhHti8tFKDQjzy6rcwuaCgYKAWUSARASFQHGX2MiY_qwRpVokrJjA5FXAZBEWA0175"
     }
     para = {
         "name": file.name,  # Use the original file name
