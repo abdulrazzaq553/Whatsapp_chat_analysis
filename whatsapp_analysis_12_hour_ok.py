@@ -18,7 +18,7 @@ file = st.sidebar.file_uploader('📁 Choose a File', type=['txt', 'zip'])
 if file is None:
     
 
-    st.info(
+    st.sidebar.info(
     "To analyze a chat, follow these steps:\n"
     "1. Open WhatsApp on your mobile and export the chat (with or without media).\n"
     "2. Send the exported file to yourself on WhatsApp.\n"
