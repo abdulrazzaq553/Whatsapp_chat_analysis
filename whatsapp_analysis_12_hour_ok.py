@@ -15,6 +15,17 @@ st.sidebar.markdown("<h2 style='text-align: center; color: #4A90E2;'>📊 WhatsA
 
 # File uploader in the sidebar, restricted to txt and zip files
 file = st.sidebar.file_uploader('📁 Choose a File', type=['txt', 'zip'])
+if file is None:
+    
+
+    st.info(
+    "To analyze a chat, follow these steps:\n"
+    "1. Open WhatsApp on your mobile and export the chat (with or without media).\n"
+    "2. Send the exported file to yourself on WhatsApp.\n"
+    "3. Open WhatsApp Web on your laptop and download the chat file (ZIP or TXT) from your own message.\n"
+    "4. Upload the downloaded file here for analysis."
+    )
+
 
 if file is not None:
     # Apply link2nd.razzaq function
