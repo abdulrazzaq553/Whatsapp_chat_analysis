@@ -2,8 +2,26 @@ import re
 import pandas as pd
 
 def start(data):
-    pattern=('\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s[AP]M\s-\s')
-    message=re.split(pattern,data)[1:]
+    lines = data.split('\n')
+    fixed_lines = []
+    pattern = re.compile(r'\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s[AP]M\s-\s')
+
+    current_line = ""
+    for line in lines:
+        if pattern.match(line):
+            # New message line starts
+            if current_line:
+                fixed_lines.append(current_line)
+            current_line = line
+        else:
+            # Continuation of previous message
+            current_line += ' ' + line
+    # Add last message
+    if current_line:
+        fixed_lines.append(current_line)
+
+    # Convert back to data string
+    data = '\n'.join(fixed_lines)
  
     dates=re.findall(pattern,data)
     df=pd.DataFrame({
