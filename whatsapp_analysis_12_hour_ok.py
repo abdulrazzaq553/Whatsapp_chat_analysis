@@ -46,7 +46,7 @@ if file is not None:
                 if extracted_file.endswith('.txt'):
                     with open(f"./extracted_files/{extracted_file}", 'r', encoding='utf-8') as f:
                         chat = f.read()
-                    k1 = link.start(chat)
+                    R1 = link.start(chat)
                     st.title('📈 Whatsapp Chat Analysis')
                     # Proceed with the analysis as usual...
 
@@ -54,19 +54,19 @@ if file is not None:
     elif file.type == "text/plain":
         bytess_data = file.getvalue()
         chat = bytess_data.decode('utf-8')
-        k1 = link.start(chat)
+        R1 = link.start(chat)
         st.title('📈 Whatsapp Chat Analysis')
 
-        user_list = k1['User'].unique().tolist()
+        user_list = R1['User'].unique().tolist()
         user_list.insert(0, 'Overall')
       
         select_user = st.sidebar.selectbox('👤 Choose User', user_list)
 
 
     if st.sidebar.button('Show Analysis'): 
-        total_mesage, total_words = link2nd.select(select_user, k1)
-        media_shared = link2nd.media_shared(select_user, k1)
-        links = link2nd.url(select_user, k1)
+        total_mesage, total_words = link2nd.select(select_user, R1)
+        media_shared = link2nd.media_shared(select_user, R1)
+        links = link2nd.url(select_user, R1)
         st.subheader('📝 Message Types')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -79,7 +79,7 @@ if file is not None:
             st.metric('Links Shared', links)
         st.subheader('🏆 Most Active Users')
         col1, col2,col3= st.columns(3)
-        x1, x2,x3= link2nd.busy_user(select_user, k1)
+        x1, x2,x3= link2nd.busy_user(select_user, R1)
         with col1:
             fig, ax = plt.subplots()
             ax.bar(x1.index, x1.values, color='g')
@@ -94,12 +94,12 @@ if file is not None:
         st.subheader('📅 Busy Days')
         col1, col2 = st.columns(2)
         with col1:
-            days2 = link2nd.days(select_user, k1)
+            days2 = link2nd.days(select_user, R1)
             fig, ax = plt.subplots()
             ax.bar(days2['dayss'], days2['Message'], color='skyblue')
             st.pyplot(fig)
         with col2:
-            days = link2nd.days(select_user, k1)
+            days = link2nd.days(select_user, R1)
             st.dataframe(days)
 
         # Most Common Words Section
@@ -107,7 +107,7 @@ if file is not None:
 
         # Common Words Bar Chart Section
         st.subheader('🔠WordsCloud(Common_Words')
-        counts = link2nd.wordscount(select_user, k1)
+        counts = link2nd.wordscount(select_user, R1)
         fig, ax = plt.subplots()
         ax.imshow(counts)
         st.pyplot(fig)
@@ -117,7 +117,7 @@ if file is not None:
         col1, col2 = st.columns(2)
         with col1:
             
-            commom = link2nd.common_words(select_user, k1)
+            commom = link2nd.common_words(select_user, R1)
             fig, ax = plt.subplots()
             ax.bar(commom[0], commom[1], color='orange')
             plt.xticks(rotation=90)
@@ -125,18 +125,18 @@ if file is not None:
             st.pyplot(fig)
             
         with col2:
-            commom = link2nd.common_words(select_user, k1)
+            commom = link2nd.common_words(select_user, R1)
             st.dataframe(commom)
 
       
         st.subheader('😃 Most Common Emojis')
-        emoji = link2nd.emojis(select_user, k1)
+        emoji = link2nd.emojis(select_user, R1)
         st.dataframe(emoji)
 
         st.subheader('📅 Monthly Stats')
         col1, col2 = st.columns(2)
         with col1:
-            month = link2nd.Month(select_user, k1)
+            month = link2nd.Month(select_user, R1)
             fig, ax = plt.subplots()
             ax.pie(month['count'], labels=month['NEW_Month'], autopct='%.2f%%', colors=sns.color_palette('pastel'))
             st.pyplot(fig)
@@ -145,7 +145,7 @@ if file is not None:
 
         # Month by Year Section
         st.subheader('📈 Month by Year')
-        year = link2nd.year(select_user, k1)
+        year = link2nd.year(select_user, R1)
         fig, ax = plt.subplots()
         ax.plot(year['new'], year['Message'], marker='o', color='purple')
         plt.xticks(rotation=90)
@@ -154,7 +154,7 @@ if file is not None:
 
 
         st.subheader('📅 Timeline Analysis')
-        daily=link2nd.daily(select_user,k1)
+        daily=link2nd.daily(select_user,R1)
 
         st.dataframe(daily)
 
@@ -167,13 +167,13 @@ if file is not None:
            '6PM': '6PM-7PM', '7PM': '7PM-8PM', '8PM': '8PM-9PM', '9PM': '9PM-10PM', 
            '10PM': '10PM-11PM', '11PM': '11PM-12AM'
             }
-        k1['tem']=k1['Times'].map(time_intervals)
+        R1['tem']=R1['Times'].map(time_intervals)
         if select_user=='Overall':
            
 
             
 
-            message_count = k1.groupby(['dayss', 'tem']).size().unstack(fill_value=0)
+            message_count = R1.groupby(['dayss', 'tem']).size().unstack(fill_value=0)
 
             days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             message_count = message_count.reindex(days_order, axis=0)
@@ -192,7 +192,7 @@ if file is not None:
             plt.xticks(rotation=45)
             plt.show()
         else:
-            check=k1[k1['User']==select_user]
+            check=R1[R1['User']==select_user]
             message_count = check.groupby(['dayss', 'tem']).size().unstack(fill_value=0)
 
             days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -213,7 +213,7 @@ if file is not None:
             plt.show()
 
         st.subheader('📋 Full Data')
-        check=link2nd.search(select_user,k1)
+        check=link2nd.search(select_user,R1)
         st.dataframe(check)
         
 st.sidebar.markdown("<hr style='border: 2px solid #4A90E2; margin: 10px 0;'>", unsafe_allow_html=True)
