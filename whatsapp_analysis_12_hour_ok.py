@@ -19,7 +19,7 @@ if file is None:
     
 
     st.sidebar.info(
-    "To analyze a chat, follow these steps:\n"
+    "To analyzze a chat, follow these steps:\n"
     "1. Open WhatsApp on your mobile and export the chat (with or without media).\n"
     "2. Send the exported file to yourself on WhatsApp.\n"
     "3. Open WhatsApp Web on your laptop and download the chat file (ZIP or TXT) from your own message.\n"
