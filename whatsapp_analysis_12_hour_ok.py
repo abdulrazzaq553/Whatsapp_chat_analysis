@@ -63,7 +63,7 @@ if file is not None:
         select_user = st.sidebar.selectbox('👤 Choose User', user_list)
 
 
-    if st.sidebar.button('Show Analysis'): 
+    if st.sidebar.button('Show Razzaq'): 
         total_mesage, total_words = link2nd.select(select_user, R1)
         media_shared = link2nd.media_shared(select_user, R1)
         links = link2nd.url(select_user, R1)
